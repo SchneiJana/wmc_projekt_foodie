@@ -1,0 +1,27 @@
+GET http://localhost:3000/books
+
+###
+GET http://localhost:3000/books/1
+
+###
+POST http://localhost:3000/books
+Content-Type: application/json
+
+{
+  "title": "The Neverending Story",
+  "author": "Michael Ende",
+  "year": 1979
+}
+
+###
+PUT http://localhost:3000/books?id=5
+Content-Type: application/json
+
+{
+  "title": "The Very Great Gatsby",
+  "author": "F. Scott Fitzgerald",
+  "year": 1925
+}
+
+###
+DELETE http://localhost:3000/books?id=1
