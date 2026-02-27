@@ -1,0 +1,101 @@
+id,name,description,shopname,price,unit
+1,Apfel Rot,Knackiger roter Tafelapfel,Bio-Markt,0.89,Stück
+2,Vollmilch,Frische Vollmilch 3.5% Fett,Milchhof Müller,1.49,Liter
+3,Baguette,Frisch gebackenes französisches Baguette,Stadtbäckerei,1.20,Stück
+4,Eier Freiland,10er Packung Freilandeier,Geflügelhof Sonnenschein,3.29,Packung
+5,Bananen,Reife gelbe Bananen aus fairem Handel,Obstwelt,1.99,kg
+6,Gouda Jung,Milder Schnittkäse in Scheiben,Käse-Ecke,2.49,Packung
+7,Butter,Ungesalzene Markenbutter,Discounter Plus,1.85,Stück
+8,Spaghetti,Hartweizengrieß Nudeln 500g,Pasta Paradies,0.99,Packung
+9,Tomatenketchup,Würziger Ketchup ohne Konservierungsstoffe,Saucenwelt,2.19,Flasche
+10,Gurke,Frische Salatgurke aus der Region,Gemüsegarten,0.79,Stück
+11,Hähnchenbrust,Frisches Hähnchenbrustfilet natur,Metzgerei Schmidt,12.90,kg
+12,Reis Langkorn,Langkorn Parboiled Reis 1kg,Reis-Depot,1.59,Packung
+13,Kaffee gemahlen,Aromatischer Röstkaffee 500g,Rösterei Bohne,5.49,Packung
+14,Orangensaft,Direktsaft 100% Fruchtgehalt,Saftbar,1.79,Liter
+15,Zwiebeln,Gelbe Speisezwiebeln im Netz,Gemüsegarten,1.49,kg
+16,Kartoffeln,Festkochende Speisekartoffeln,Bauernladen,4.50,5kg-Sack
+17,Lachsfilet,Frisches Lachsfilet mit Haut,Fischmarkt,24.90,kg
+18,Olivenöl,Extra Vergine Olivenöl aus Italien,Feinkost Luigi,8.99,Flasche
+19,Joghurt Natur,Cremiger Naturjoghurt 1.5% Fett,Milchhof Müller,0.65,Becher
+20,Vollkornbrot,Saftiges Vollkornbrot mit Saaten,Stadtbäckerei,3.10,Stück
+21,Paprika Mix,Dreifarbiges Paprika-Set,Obstwelt,2.29,Packung
+22,Schokolade Zartbitter,Edelbitterschokolade 70% Kakao,Süße Ecke,1.29,Tafel
+23,Mineralwasser,Sprudelndes Mineralwasser,Getränke-Quelle,0.65,Flasche
+24,Erdbeerkonfitüre,Hausgemachte Erdbeermarmelade,Frühstücksglück,2.89,Glas
+25,Penne,Röhrennudeln aus Hartweizen,Pasta Paradies,0.99,Packung
+26,Rinderhackfleisch,Frisch gewolltes Rinderhack,Metzgerei Schmidt,9.80,kg
+27,Blumenkohl,Frischer weißer Blumenkohl,Gemüsegarten,2.49,Stück
+28,Honig,Waldhonig aus regionaler Imkerei,Imkerhof,6.50,Glas
+29,Schinken roh,Luftgetrockneter Schinken,Metzgerei Schmidt,2.99,100g
+30,Haferflocken,Zarte Haferflocken 500g,Bio-Markt,0.79,Packung
+31,Zitronen,Saftige Zitronen unbehandelt,Obstwelt,1.50,Netz
+32,Schlagsahne,Frische Schlagsahne 30% Fett,Milchhof Müller,0.99,Becher
+33,Tiefkühl-Erbsen,Extra feine junge Erbsen,Frosty-Food,1.49,Packung
+34,Basilikum,Frischer Basilikum im Topf,Gärtnerei Grün,1.99,Topf
+35,Knoblauch,Weißer Knoblauch im 3er Pack,Gemüsegarten,0.99,Packung
+36,Thunfisch,Thunfischfilets in eigenem Saft,Fischmarkt,1.69,Dose
+37,Müsli Beeren,Früchtemüsli ohne Zuckerzusatz,Bio-Markt,3.99,Packung
+38,Karotten,Knackige Speisemöhren,Bauernladen,1.29,kg
+39,Emmentaler,Original Schweizer Hartkäse,Käse-Ecke,3.50,200g
+40,Zucker,Feiner weißer Kristallzucker,Discounter Plus,0.89,Packung
+41,Salz,Jodiertes Speisesalz,Discounter Plus,0.39,Packung
+42,Pfeffer Schwarz,Ganze schwarze Pfefferkörner,Gewürzinsel,2.99,Glas
+43,Avocado,Essreife Avocado Hass,Obstwelt,1.49,Stück
+44,Brokkoli,Frischer grüner Brokkoli,Gemüsegarten,1.79,Stück
+45,Walnüsse,Geöffnete Walnusskerne,Nussknacker,3.49,Packung
+46,Tee Grün,Sencha Grüntee lose,Teeladen,4.20,100g
+47,Senf Mittelscharf,Klassischer Delikatess-Senf,Saucenwelt,0.85,Glas
+48,Chips gesalzen,Klassische Kartoffelchips,Knabberkiste,1.59,Packung
+49,Rotwein,Trockener Spätburgunder,Weinhaus,7.50,Flasche
+50,Weißwein,Riesling Qualitätswein,Weinhaus,6.90,Flasche
+51,Bier Pils,Regionales Pilsener,Getränke-Quelle,0.95,Flasche
+52,Cola,Koffeinhaltiges Erfrischungsgetränk,Getränke-Quelle,1.10,Flasche
+53,Pizza Margherita,Tiefkühlpizza Steinofen,Frosty-Food,2.99,Packung
+54,Lasagne,Frische Lasagne Bolognese 400g,Feinkost Luigi,4.50,Schale
+55,Hüttenkäse,Körniger Frischkäse light,Milchhof Müller,0.89,Becher
+56,Blaubeeren,Frische Heidelbeeren 200g,Obstwelt,2.99,Packung
+57,Mango,Flugmango extra süß,Obstwelt,3.50,Stück
+58,Spinat frisch,Junger Blattspinat gewaschen,Gemüsegarten,1.99,Packung
+59,Forelle,Frische Regenbogenforelle,Fischmarkt,14.50,kg
+60,Putenschnitzel,Zarte Schnitzel aus der Putenbrust,Metzgerei Schmidt,11.20,kg
+61,Essig Balsamico,Aceto Balsamico di Modena,Feinkost Luigi,5.99,Flasche
+62,Mais,Süßmais in der Dose,Gemüsegarten,0.79,Dose
+63,Kidneybohnen,Rote Kidneybohnen verzehrfertig,Discounter Plus,0.69,Dose
+64,Champignons,Weiße Champignons Köpfe,Gemüsegarten,1.89,Packung
+65,Lauch,Frische Stangenlauch,Gemüsegarten,0.99,Stück
+66,Salami,Italienische Edelsalami,Feinkost Luigi,3.99,Stück
+67,Camembert,Französischer Weichkäse,Käse-Ecke,2.19,Packung
+68,Toastbrot,Weizen-Toastbrot geschnitten,Stadtbäckerei,1.39,Packung
+69,Erdnussbutter,Creamy Erdnusscreme,Süße Ecke,2.79,Glas
+70,Ahornsirup,Original kanadischer Grad A,Bio-Markt,6.99,Flasche
+71,Tofu Natur,Bio-Tofu fest,Veggie-Welt,1.89,Packung
+72,Hummus,Kichererbsen-Dip klassisch,Veggie-Welt,1.49,Becher
+73,Linsen Rot,Rote Linsen geschält 500g,Reis-Depot,1.99,Packung
+74,Quinoa,Weißer Bio-Quinoa,Bio-Markt,3.49,Packung
+75,Couscous,Hartweizengrieß Couscous,Reis-Depot,1.59,Packung
+76,Zucchini,Frische grüne Zucchini,Gemüsegarten,1.20,kg
+77,Auberginen,Glänzende dunkle Auberginen,Gemüsegarten,0.99,Stück
+78,Ingwer,Frische Ingwerwurzel,Gemüsegarten,4.90,kg
+79,Kurkuma,Frische Kurkumawurzel,Bio-Markt,0.89,100g
+80,Rosmarin,Frischer Rosmarin im Bund,Gärtnerei Grün,1.29,Bund
+81,Thymian,Frischer Thymian im Bund,Gärtnerei Grün,1.29,Bund
+82,Parmesan,Original Grana Padano,Feinkost Luigi,4.20,200g
+83,Garnelen,TK Riesengarnelen geschält,Fischmarkt,8.99,Packung
+84,Hefe frisch,Frischer Hefewürfel 42g,Stadtbäckerei,0.15,Stück
+85,Backpulver,Backtriebmittel 10er Pack,Discounter Plus,0.69,Packung
+86,Vanillezucker,Echter Vanillezucker,Discounter Plus,1.29,Packung
+87,Mehl Type 405,Weizenmehl klassisch 1kg,Discounter Plus,0.79,Packung
+88,Mandeln,Ganze Mandeln naturbelassen,Nussknacker,2.49,Packung
+89,Haselnüsse,Gehackte Haselnusskerne,Nussknacker,1.99,Packung
+90,Rosinen,Sultaninen getrocknet,Obstwelt,1.29,Packung
+91,Apfelsaft,Naturtrüber Apfelsaft,Saftbar,1.69,Liter
+92,Eistee Pfirsich,Erfrischungstee Pfirsichgeschmack,Getränke-Quelle,1.29,Flasche
+93,Gummibärchen,Fruchtgummi Mischung,Süße Ecke,0.99,Packung
+94,Salzstangen,Klassisches Salzgebäck,Knabberkiste,0.89,Packung
+95,Zwieback,Knuspriger Weizenzwieback,Discounter Plus,1.79,Packung
+96,Knäckebrut,Roggenvollkorn Knäckebrot,Discounter Plus,1.19,Packung
+97,Schmelzkäse,Streichzarter Schmelzkäse,Käse-Ecke,1.49,Becher
+98,Radieschen,Frische Radieschen im Bund,Gemüsegarten,0.69,Bund
+99,Spargel Weiß,Frischer deutscher Stangenspargel,Bauernladen,8.50,kg
+100,Rhabarber,Frischer Rhabarber für Kuchen,Bauernladen,2.99,kg
