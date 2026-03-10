@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:foodie_app/cards/foodcard.dart';
 import 'package:foodie_app/models/food.dart';
+import 'package:foodie_app/pages/details.dart';
 import 'package:foodie_app/services/db_service.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:geocoding/geocoding.dart';
@@ -55,9 +56,12 @@ class _HomeState extends State<Home> {
 
     try {
       Position position = await Geolocator.getCurrentPosition(
-          desiredAccuracy: LocationAccuracy.high);
-      List<Placemark> placemarks =
-          await placemarkFromCoordinates(position.latitude, position.longitude);
+        desiredAccuracy: LocationAccuracy.high,
+      );
+      List<Placemark> placemarks = await placemarkFromCoordinates(
+        position.latitude,
+        position.longitude,
+      );
 
       if (placemarks.isNotEmpty) {
         Placemark place = placemarks.first;
@@ -100,7 +104,10 @@ class _HomeState extends State<Home> {
                   const SizedBox(width: 4),
                   Text(
                     _currentAddress,
-                    style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
+                    style: const TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 16,
+                    ),
                   ),
                 ],
               ),
@@ -141,10 +148,20 @@ class _HomeState extends State<Home> {
                   ),
                   itemCount: foods.length,
                   itemBuilder: (context, index) {
-                    return FoodCard(
-                      name: foods[index].name,
-                      price: foods[index].price,
-                      unit: foods[index].unit,
+                    return GestureDetector(
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => DetailsPage(food: foods[index]),
+                          ),
+                        );
+                      },
+                      child: FoodCard(
+                        name: foods[index].name,
+                        price: foods[index].price,
+                        unit: foods[index].unit,
+                      ),
                     );
                   },
                 ),
