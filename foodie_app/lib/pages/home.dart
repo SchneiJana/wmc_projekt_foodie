@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:foodie_app/cards/foodcard.dart';
 import 'package:foodie_app/models/food.dart';
 import 'package:foodie_app/services/db_service.dart';
+import 'package:geolocator/geolocator.dart';
+import 'package:geocoding/geocoding.dart';
 
 class Home extends StatefulWidget {
   const Home({super.key});
@@ -12,11 +14,62 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> {
   var foods = List<Food>.empty();
+  String _currentAddress = "Lade Standort...";
 
   @override
   void initState() {
     loadData();
+    _getCurrentLocation();
     super.initState();
+  }
+
+  Future<void> _getCurrentLocation() async {
+    bool serviceEnabled;
+    LocationPermission permission;
+
+    serviceEnabled = await Geolocator.isLocationServiceEnabled();
+    if (!serviceEnabled) {
+      setState(() {
+        _currentAddress = "Standortdienste deaktiviert";
+      });
+      return;
+    }
+
+    permission = await Geolocator.checkPermission();
+    if (permission == LocationPermission.denied) {
+      permission = await Geolocator.requestPermission();
+      if (permission == LocationPermission.denied) {
+        setState(() {
+          _currentAddress = "Standort verweigert";
+        });
+        return;
+      }
+    }
+
+    if (permission == LocationPermission.deniedForever) {
+      setState(() {
+        _currentAddress = "Standort dauerhaft verweigert";
+      });
+      return;
+    }
+
+    try {
+      Position position = await Geolocator.getCurrentPosition(
+          desiredAccuracy: LocationAccuracy.high);
+      List<Placemark> placemarks =
+          await placemarkFromCoordinates(position.latitude, position.longitude);
+
+      if (placemarks.isNotEmpty) {
+        Placemark place = placemarks.first;
+        setState(() {
+          _currentAddress = "${place.street ?? 'Unbekannte Straße'}";
+        });
+      }
+    } catch (e) {
+      setState(() {
+        _currentAddress = "Fehler beim Laden";
+      });
+    }
   }
 
   Future<void> loadData([String? query]) async {
@@ -41,13 +94,13 @@ class _HomeState extends State<Home> {
                 "Delivery Address",
                 style: TextStyle(color: Colors.grey, fontSize: 16),
               ),
-              const Row(
+              Row(
                 children: [
-                  Icon(Icons.location_on_outlined, size: 18),
-                  SizedBox(width: 4),
+                  const Icon(Icons.location_on_outlined, size: 18),
+                  const SizedBox(width: 4),
                   Text(
-                    "Musterstraße 1",
-                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
+                    _currentAddress,
+                    style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
                   ),
                 ],
               ),
