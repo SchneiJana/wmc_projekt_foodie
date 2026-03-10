@@ -9,8 +9,10 @@ class DbService {
 
   DbService({http.Client? client}) : _client = client ?? http.Client();
 
-  Future<List<Food>> getFoods() async {
-    final uri = Uri.parse('$baseUrl/foods');
+  Future<List<Food>> getFoods([String? searchString]) async {
+    final uri = (searchString != null && searchString.isNotEmpty)
+        ? Uri.parse('$baseUrl/foods/$searchString')
+        : Uri.parse('$baseUrl/foods');
 
     try {
       final response = await _client.get(
@@ -18,15 +20,19 @@ class DbService {
         headers: {'Content-Type': 'application/json'},
       );
 
-      _client.close();
+      if (response.body.isEmpty) return [];
 
-      List<dynamic> body = jsonDecode(response.body);
+      dynamic body = jsonDecode(response.body);
 
-      List<Food> skills = body
-          .map((dynamic item) => Food.fromJson(item as Map<String, dynamic>))
-          .toList();
+      if (body is List) {
+        return body
+            .map((dynamic item) => Food.fromJson(item as Map<String, dynamic>))
+            .toList();
+      } else if (body is Map<String, dynamic>) {
+        return [Food.fromJson(body)];
+      }
 
-      return skills;
+      return [];
     } catch (e) {
       return List<Food>.empty();
     }

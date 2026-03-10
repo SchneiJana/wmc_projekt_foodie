@@ -19,8 +19,8 @@ class _HomeState extends State<Home> {
     super.initState();
   }
 
-  Future<void> loadData() async {
-    var f = await DbService().getFoods();
+  Future<void> loadData([String? query]) async {
+    var f = await DbService().getFoods(query);
     setState(() {
       foods = f;
     });
@@ -29,6 +29,7 @@ class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 20.0),
@@ -42,7 +43,7 @@ class _HomeState extends State<Home> {
               ),
               const Row(
                 children: [
-                  Icon(Icons.location_on, size: 18),
+                  Icon(Icons.location_on_outlined, size: 18),
                   SizedBox(width: 4),
                   Text(
                     "Musterstraße 1",
@@ -59,12 +60,19 @@ class _HomeState extends State<Home> {
               ),
               const SizedBox(height: 30),
               TextField(
+                onChanged: (value) {
+                  loadData(value);
+                },
                 decoration: InputDecoration(
                   hintText: 'Food',
                   suffixIcon: const Icon(Icons.search),
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(30),
                     borderSide: const BorderSide(color: Colors.grey),
+                  ),
+                  enabledBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(30),
+                    borderSide: BorderSide(color: Colors.grey.shade300),
                   ),
                   contentPadding: const EdgeInsets.symmetric(horizontal: 20),
                 ),
