@@ -160,19 +160,24 @@ class _CartPageState extends State<CartPage> {
 
   @override
   Widget build(BuildContext context) {
+    final colorScheme = Theme.of(context).colorScheme;
+
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: colorScheme.surface,
       appBar: AppBar(
-        backgroundColor: Colors.white,
+        backgroundColor: Colors.transparent,
         elevation: 0,
         centerTitle: true,
         leading: IconButton(
-          icon: const Icon(Icons.arrow_back, color: Colors.black),
+          icon: Icon(Icons.arrow_back, color: colorScheme.onSurface),
           onPressed: () => context.pop(),
         ),
-        title: const Text(
+        title: Text(
           'Warenkorb',
-          style: TextStyle(color: Colors.black, fontWeight: FontWeight.w600),
+          style: TextStyle(
+            color: colorScheme.onSurface,
+            fontWeight: FontWeight.w600,
+          ),
         ),
       ),
       body: cartItems.isEmpty
@@ -187,7 +192,7 @@ class _CartPageState extends State<CartPage> {
                   margin: const EdgeInsets.only(bottom: 20),
                   padding: const EdgeInsets.all(16),
                   decoration: BoxDecoration(
-                    color: Colors.grey[100],
+                    color: colorScheme.secondaryContainer.withOpacity(0.3),
                     borderRadius: BorderRadius.circular(16),
                   ),
                   child: Row(
@@ -197,13 +202,15 @@ class _CartPageState extends State<CartPage> {
                         width: 80,
                         height: 80,
                         decoration: BoxDecoration(
-                          color: Colors.white,
+                          color: colorScheme.surface,
                           borderRadius: BorderRadius.circular(12),
-                          border: Border.all(color: Colors.grey.shade300),
+                          border: Border.all(
+                            color: colorScheme.primary.withOpacity(0.2),
+                          ),
                         ),
-                        child: const Icon(
+                        child: Icon(
                           Icons.image_outlined,
-                          color: Colors.black54,
+                          color: colorScheme.primary.withOpacity(0.5),
                           size: 40,
                         ),
                       ),
@@ -215,9 +222,10 @@ class _CartPageState extends State<CartPage> {
                           children: [
                             Text(
                               food['name'],
-                              style: const TextStyle(
+                              style: TextStyle(
                                 fontSize: 16,
                                 fontWeight: FontWeight.bold,
+                                color: colorScheme.onSurface,
                               ),
                             ),
                             const SizedBox(height: 4),
@@ -225,15 +233,16 @@ class _CartPageState extends State<CartPage> {
                               "${food['unit'] ?? ''}",
                               style: TextStyle(
                                 fontSize: 14,
-                                color: Colors.grey[600],
+                                color: colorScheme.onSurface.withOpacity(0.6),
                               ),
                             ),
                             const SizedBox(height: 8),
                             Text(
                               "€${food['price']}/${food['unit'] ?? ''}",
-                              style: const TextStyle(
+                              style: TextStyle(
                                 fontSize: 14,
                                 fontWeight: FontWeight.w600,
+                                color: colorScheme.primary,
                               ),
                             ),
                           ],
@@ -255,7 +264,8 @@ class _CartPageState extends State<CartPage> {
                                 ),
                                 padding: EdgeInsets.zero,
                                 style: IconButton.styleFrom(
-                                  backgroundColor: Colors.grey[300],
+                                  backgroundColor: colorScheme.primaryContainer,
+                                  foregroundColor: colorScheme.onPrimaryContainer,
                                   shape: RoundedRectangleBorder(
                                     borderRadius: BorderRadius.circular(8),
                                   ),
@@ -281,7 +291,8 @@ class _CartPageState extends State<CartPage> {
                                 ),
                                 padding: EdgeInsets.zero,
                                 style: IconButton.styleFrom(
-                                  backgroundColor: Colors.grey[300],
+                                  backgroundColor: colorScheme.primaryContainer,
+                                  foregroundColor: colorScheme.onPrimaryContainer,
                                   shape: RoundedRectangleBorder(
                                     borderRadius: BorderRadius.circular(8),
                                   ),
@@ -299,10 +310,10 @@ class _CartPageState extends State<CartPage> {
       bottomNavigationBar: Container(
         padding: const EdgeInsets.all(24.0),
         decoration: BoxDecoration(
-          color: Colors.white,
+          color: colorScheme.surface,
           boxShadow: [
             BoxShadow(
-              color: Colors.grey.withValues(alpha: 0.1),
+              color: colorScheme.onSurface.withOpacity(0.05),
               spreadRadius: 1,
               blurRadius: 10,
               offset: const Offset(0, -5),
@@ -317,15 +328,19 @@ class _CartPageState extends State<CartPage> {
                 mainAxisSize: MainAxisSize.min,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const Text(
+                  Text(
                     "Gesamt",
-                    style: TextStyle(fontSize: 14, color: Colors.black54),
+                    style: TextStyle(
+                      fontSize: 14,
+                      color: colorScheme.onSurface.withOpacity(0.6),
+                    ),
                   ),
                   Text(
                     "${totalPrice.toStringAsFixed(2)} €",
-                    style: const TextStyle(
+                    style: TextStyle(
                       fontSize: 24,
                       fontWeight: FontWeight.bold,
+                      color: colorScheme.onSurface,
                     ),
                   ),
                 ],
@@ -333,8 +348,8 @@ class _CartPageState extends State<CartPage> {
               ElevatedButton(
                 onPressed: _showCheckoutPanel,
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.black87,
-                  foregroundColor: Colors.white,
+                  backgroundColor: colorScheme.primary,
+                  foregroundColor: colorScheme.onPrimary,
                   padding: const EdgeInsets.symmetric(
                     horizontal: 32,
                     vertical: 16,

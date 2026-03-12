@@ -4,7 +4,7 @@ import 'package:foodie_app/models/food.dart';
 import 'package:http/http.dart' as http;
 
 class DbService {
-  final String baseUrl = 'http://10.58.112.160:3000';
+  final String baseUrl = 'http://10.0.2.2:3000';
   final http.Client _client;
 
   DbService({http.Client? client}) : _client = client ?? http.Client();

@@ -18,32 +18,38 @@ class _DetailsPageState extends State<DetailsPage> {
   Future<void> _addToCart() async {
     final prefs = await SharedPreferences.getInstance();
     List<String> cartItems = prefs.getStringList('cart') ?? [];
-    
+
     Map<String, dynamic> cartItem = {
       'food': widget.food.toJson(),
       'quantity': _quantity,
       'totalPrice': widget.food.price * _quantity,
     };
-    
+
     cartItems.add(jsonEncode(cartItem));
     await prefs.setStringList('cart', cartItems);
-    
+
     if (mounted) {
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('${widget.food.name} ($_quantity ${widget.food.unit}) zum Warenkorb hinzugefügt!')),
+        SnackBar(
+          content: Text(
+            '${widget.food.name} ($_quantity ${widget.food.unit}) zum Warenkorb hinzugefügt!',
+          ),
+        ),
       );
     }
   }
 
   @override
   Widget build(BuildContext context) {
+    final colorScheme = Theme.of(context).colorScheme;
+
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: colorScheme.surface,
       appBar: AppBar(
-        backgroundColor: Colors.white,
+        backgroundColor: Colors.transparent,
         elevation: 0,
         leading: IconButton(
-          icon: const Icon(Icons.arrow_back, color: Colors.black),
+          icon: Icon(Icons.arrow_back, color: colorScheme.onSurface),
           onPressed: () => Navigator.of(context).pop(),
         ),
       ),
@@ -62,21 +68,32 @@ class _DetailsPageState extends State<DetailsPage> {
                         height: 250,
                         width: double.infinity,
                         decoration: BoxDecoration(
-                          color: Colors.grey[300],
+                          color: colorScheme.secondaryContainer.withOpacity(0.5),
                           borderRadius: BorderRadius.circular(12),
                         ),
-                        child: const Icon(Icons.image_outlined, size: 100, color: Colors.black54),
+                        child: Icon(
+                          Icons.image_outlined,
+                          size: 100,
+                          color: colorScheme.primary.withOpacity(0.7),
+                        ),
                       ),
                       const SizedBox(height: 24),
                       // Title and Shopname
                       Text(
                         widget.food.name,
-                        style: const TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+                        style: TextStyle(
+                          fontSize: 24,
+                          fontWeight: FontWeight.bold,
+                          color: colorScheme.onSurface,
+                        ),
                       ),
                       const SizedBox(height: 4),
                       Text(
                         widget.food.shopname,
-                        style: TextStyle(fontSize: 14, color: Colors.grey[600]),
+                        style: TextStyle(
+                          fontSize: 14,
+                          color: colorScheme.onSurface.withOpacity(0.6),
+                        ),
                       ),
                       const SizedBox(height: 24),
                       // Price and Quantity Row
@@ -88,12 +105,21 @@ class _DetailsPageState extends State<DetailsPage> {
                             children: [
                               Text(
                                 "€${widget.food.price.toStringAsFixed(2)}",
-                                style: const TextStyle(fontSize: 32, fontWeight: FontWeight.bold, height: 1.0),
+                                style: TextStyle(
+                                  fontSize: 32,
+                                  fontWeight: FontWeight.bold,
+                                  height: 1.0,
+                                  color: colorScheme.primary,
+                                ),
                               ),
                               const SizedBox(width: 4),
                               Text(
                                 "/${widget.food.unit}",
-                                style: TextStyle(fontSize: 16, color: Colors.grey[600], fontWeight: FontWeight.w500),
+                                style: TextStyle(
+                                  fontSize: 16,
+                                  color: colorScheme.onSurface.withOpacity(0.6),
+                                  fontWeight: FontWeight.w500,
+                                ),
                               ),
                             ],
                           ),
@@ -108,17 +134,24 @@ class _DetailsPageState extends State<DetailsPage> {
                                 },
                                 icon: const Icon(Icons.remove, size: 20),
                                 style: IconButton.styleFrom(
-                                  backgroundColor: Colors.grey[200],
-                                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+                                  backgroundColor: colorScheme.primaryContainer,
+                                  foregroundColor: colorScheme.onPrimaryContainer,
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(8),
+                                  ),
                                   padding: const EdgeInsets.all(8),
                                   minimumSize: Size.zero,
-                                  tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                                  tapTargetSize:
+                                      MaterialTapTargetSize.shrinkWrap,
                                 ),
                               ),
                               const SizedBox(width: 12),
                               Text(
                                 "$_quantity ${widget.food.unit}",
-                                style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                                style: const TextStyle(
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.bold,
+                                ),
                               ),
                               const SizedBox(width: 12),
                               IconButton(
@@ -127,11 +160,15 @@ class _DetailsPageState extends State<DetailsPage> {
                                 },
                                 icon: const Icon(Icons.add, size: 20),
                                 style: IconButton.styleFrom(
-                                  backgroundColor: Colors.grey[200],
-                                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+                                  backgroundColor: colorScheme.primaryContainer,
+                                  foregroundColor: colorScheme.onPrimaryContainer,
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(8),
+                                  ),
                                   padding: const EdgeInsets.all(8),
                                   minimumSize: Size.zero,
-                                  tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                                  tapTargetSize:
+                                      MaterialTapTargetSize.shrinkWrap,
                                 ),
                               ),
                             ],
@@ -142,7 +179,11 @@ class _DetailsPageState extends State<DetailsPage> {
                       // Description
                       Text(
                         widget.food.description,
-                        style: const TextStyle(fontSize: 15, color: Colors.black87, height: 1.5),
+                        style: TextStyle(
+                          fontSize: 15,
+                          color: colorScheme.onSurface,
+                          height: 1.5,
+                        ),
                       ),
                       const SizedBox(height: 20),
                     ],
@@ -152,19 +193,32 @@ class _DetailsPageState extends State<DetailsPage> {
             ),
             // Add to Cart Button
             Padding(
-              padding: const EdgeInsets.only(left: 20, right: 20, bottom: 20, top: 10),
+              padding: const EdgeInsets.only(
+                left: 20,
+                right: 20,
+                bottom: 20,
+                top: 10,
+              ),
               child: Align(
                 alignment: Alignment.centerRight,
                 child: ElevatedButton.icon(
                   onPressed: _addToCart,
-                  icon: const Icon(Icons.shopping_cart, color: Colors.white, size: 20),
-                  label: const Text("Add to cart", style: TextStyle(color: Colors.white, fontSize: 16)),
+                  icon: const Icon(
+                    Icons.shopping_cart,
+                    size: 20,
+                  ),
+                  label: const Text(
+                    "Zum Warenkorb hinzufügen",
+                    style: TextStyle(fontSize: 16),
+                  ),
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors.black87,
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(12),
                     ),
-                    padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 14),
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 24,
+                      vertical: 14,
+                    ),
                     elevation: 0,
                   ),
                 ),

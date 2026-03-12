@@ -89,7 +89,7 @@ class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: Theme.of(context).colorScheme.surface,
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 20.0),
@@ -103,7 +103,11 @@ class _HomeState extends State<Home> {
               ),
               Row(
                 children: [
-                  const Icon(Icons.location_on_outlined, size: 18),
+                  Icon(
+                    Icons.location_on_outlined,
+                    size: 18,
+                    color: Theme.of(context).colorScheme.primary,
+                  ),
                   const SizedBox(width: 4),
                   Text(
                     _currentAddress,
@@ -115,10 +119,14 @@ class _HomeState extends State<Home> {
                 ],
               ),
               const SizedBox(height: 40),
-              const Center(
+              Center(
                 child: Text(
                   "FOODIE - Quick and easy",
-                  style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
+                  style: TextStyle(
+                    fontSize: 22,
+                    fontWeight: FontWeight.bold,
+                    color: Theme.of(context).colorScheme.primary,
+                  ),
                 ),
               ),
               const SizedBox(height: 30),
@@ -128,7 +136,10 @@ class _HomeState extends State<Home> {
                 },
                 decoration: InputDecoration(
                   hintText: 'Lebensmittel',
-                  suffixIcon: const Icon(Icons.search),
+                  suffixIcon: Icon(
+                    Icons.search,
+                    color: Theme.of(context).colorScheme.primary,
+                  ),
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(30),
                     borderSide: const BorderSide(color: Colors.grey),
@@ -136,6 +147,13 @@ class _HomeState extends State<Home> {
                   enabledBorder: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(30),
                     borderSide: BorderSide(color: Colors.grey.shade300),
+                  ),
+                  focusedBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(30),
+                    borderSide: BorderSide(
+                      color: Theme.of(context).colorScheme.primary,
+                      width: 2,
+                    ),
                   ),
                   contentPadding: const EdgeInsets.symmetric(horizontal: 20),
                 ),
@@ -177,18 +195,21 @@ class _HomeState extends State<Home> {
       bottomNavigationBar: Container(
         margin: const EdgeInsets.all(20),
         decoration: BoxDecoration(
-          color: Colors.grey[300],
+          color: Theme.of(context).colorScheme.secondaryContainer,
           borderRadius: BorderRadius.circular(40),
         ),
         child: BottomNavigationBar(
           backgroundColor: Colors.transparent,
           elevation: 0,
-          selectedItemColor: Colors.black,
-          unselectedItemColor: Colors.black54,
+          selectedItemColor: Theme.of(context).colorScheme.primary,
+          unselectedItemColor:
+              Theme.of(context).colorScheme.onSecondaryContainer.withOpacity(0.5),
           currentIndex: 0, // Set to 0 because this is Home
           onTap: (index) {
             if (index == 1) {
               context.push('/cart');
+            } else if (index == 2) {
+              context.push('/settings');
             }
           },
           items: const [
