@@ -5,6 +5,7 @@ import 'package:foodie_app/pages/details.dart';
 import 'package:foodie_app/services/db_service.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:geocoding/geocoding.dart';
+import 'package:go_router/go_router.dart';
 
 class Home extends StatefulWidget {
   const Home({super.key});
@@ -56,7 +57,9 @@ class _HomeState extends State<Home> {
 
     try {
       Position position = await Geolocator.getCurrentPosition(
-        desiredAccuracy: LocationAccuracy.high,
+        locationSettings: const LocationSettings(
+          accuracy: LocationAccuracy.high,
+        ),
       );
       List<Placemark> placemarks = await placemarkFromCoordinates(
         position.latitude,
@@ -66,7 +69,7 @@ class _HomeState extends State<Home> {
       if (placemarks.isNotEmpty) {
         Placemark place = placemarks.first;
         setState(() {
-          _currentAddress = "${place.street ?? 'Unbekannte Straße'}";
+          _currentAddress = place.street ?? 'Unbekannte Straße';
         });
       }
     } catch (e) {
@@ -95,7 +98,7 @@ class _HomeState extends State<Home> {
             children: [
               const SizedBox(height: 20),
               const Text(
-                "Delivery Address",
+                "Lieferadresse",
                 style: TextStyle(color: Colors.grey, fontSize: 16),
               ),
               Row(
@@ -124,7 +127,7 @@ class _HomeState extends State<Home> {
                   loadData(value);
                 },
                 decoration: InputDecoration(
-                  hintText: 'Food',
+                  hintText: 'Lebensmittel',
                   suffixIcon: const Icon(Icons.search),
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(30),
@@ -153,7 +156,8 @@ class _HomeState extends State<Home> {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (context) => DetailsPage(food: foods[index]),
+                            builder: (context) =>
+                                DetailsPage(food: foods[index]),
                           ),
                         );
                       },
@@ -181,6 +185,12 @@ class _HomeState extends State<Home> {
           elevation: 0,
           selectedItemColor: Colors.black,
           unselectedItemColor: Colors.black54,
+          currentIndex: 0, // Set to 0 because this is Home
+          onTap: (index) {
+            if (index == 1) {
+              context.push('/cart');
+            }
+          },
           items: const [
             BottomNavigationBarItem(
               icon: Icon(Icons.home_outlined),
@@ -188,11 +198,11 @@ class _HomeState extends State<Home> {
             ),
             BottomNavigationBarItem(
               icon: Icon(Icons.shopping_cart_outlined),
-              label: 'Cart',
+              label: 'Warenkorb',
             ),
             BottomNavigationBarItem(
               icon: Icon(Icons.settings_outlined),
-              label: 'Settings',
+              label: 'Einstellungen',
             ),
           ],
         ),

@@ -37,7 +37,6 @@ class _DetailsPageState extends State<DetailsPage> {
 
   @override
   Widget build(BuildContext context) {
-    double totalPrice = widget.food.price * _quantity;
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
@@ -88,7 +87,7 @@ class _DetailsPageState extends State<DetailsPage> {
                             crossAxisAlignment: CrossAxisAlignment.end,
                             children: [
                               Text(
-                                "€${totalPrice.toStringAsFixed(0)}",
+                                "€${widget.food.price.toStringAsFixed(2)}",
                                 style: const TextStyle(fontSize: 32, fontWeight: FontWeight.bold, height: 1.0),
                               ),
                               const SizedBox(width: 4),

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:foodie_app/pages/home.dart';
+import 'package:foodie_app/pages/cart.dart';
 import 'package:go_router/go_router.dart';
 
 void main() {
@@ -15,6 +16,12 @@ class MyApp extends StatelessWidget {
         path: '/',
         builder: (context, state) {
           return Home();
+        },
+      ),
+      GoRoute(
+        path: '/cart',
+        builder: (context, state) {
+          return const CartPage();
         },
       ),
     ],
