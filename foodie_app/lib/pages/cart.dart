@@ -76,7 +76,35 @@ class _CartPageState extends State<CartPage> {
     _updateCartAndSave();
   }
 
+  Future<void> _checkout() async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.remove('cart');
+    setState(() {
+      cartItems = [];
+      totalPrice = 0;
+    });
+    if (!mounted) return;
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: const Row(
+          children: [
+            Icon(Icons.check_circle, color: Colors.white),
+            SizedBox(width: 12),
+            Text('Zahlung erfolgreich!', style: TextStyle(fontSize: 15)),
+          ],
+        ),
+        backgroundColor: Colors.green.shade700,
+        behavior: SnackBarBehavior.floating,
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+        margin: const EdgeInsets.all(16),
+        duration: const Duration(seconds: 3),
+      ),
+    );
+  }
+
   void _showCheckoutPanel() {
+    final colorScheme = Theme.of(context).colorScheme;
+
     showModalBottomSheet(
       context: context,
       isScrollControlled: true,
@@ -84,69 +112,147 @@ class _CartPageState extends State<CartPage> {
       builder: (context) {
         return Container(
           height: MediaQuery.of(context).size.height * 0.7,
-          decoration: const BoxDecoration(
-            color: Colors.white,
-            borderRadius: BorderRadius.only(
-              topLeft: Radius.circular(20),
-              topRight: Radius.circular(20),
+          decoration: BoxDecoration(
+            color: colorScheme.surface,
+            borderRadius: const BorderRadius.only(
+              topLeft: Radius.circular(24),
+              topRight: Radius.circular(24),
             ),
           ),
           child: Column(
             children: [
-              const SizedBox(height: 10),
+              const SizedBox(height: 12),
               // Drag handle
               Container(
                 width: 40,
                 height: 5,
                 decoration: BoxDecoration(
-                  color: Colors.grey[300],
+                  color: colorScheme.onSurface.withOpacity(0.2),
                   borderRadius: BorderRadius.circular(10),
                 ),
               ),
               const SizedBox(height: 20),
-              const Text(
-                "Zahlen",
-                style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+              Text(
+                "Bezahlen",
+                style: TextStyle(
+                  fontSize: 22,
+                  fontWeight: FontWeight.bold,
+                  color: colorScheme.onSurface,
+                ),
               ),
-              const Spacer(),
+              const SizedBox(height: 16),
+              // Items label
               Padding(
-                padding: const EdgeInsets.all(20.0),
+                padding: const EdgeInsets.symmetric(horizontal: 20),
+                child: Align(
+                  alignment: Alignment.centerLeft,
+                  child: Text(
+                    "Lebensmittel",
+                    style: TextStyle(
+                      fontSize: 14,
+                      fontWeight: FontWeight.w600,
+                      color: colorScheme.onSurface.withOpacity(0.5),
+                    ),
+                  ),
+                ),
+              ),
+              const SizedBox(height: 8),
+              // Cart items list
+              Expanded(
+                child: ListView.separated(
+                  padding: const EdgeInsets.symmetric(horizontal: 20),
+                  itemCount: cartItems.length,
+                  separatorBuilder: (_, __) =>
+                      Divider(color: colorScheme.onSurface.withOpacity(0.08)),
+                  itemBuilder: (context, index) {
+                    final item = cartItems[index];
+                    final food = item['food'];
+                    return Padding(
+                      padding: const EdgeInsets.symmetric(vertical: 8),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Expanded(
+                            child: Text(
+                              food['name'],
+                              style: TextStyle(
+                                fontSize: 15,
+                                color: colorScheme.onSurface,
+                              ),
+                            ),
+                          ),
+                          Text(
+                            '${item['quantity']}x',
+                            style: TextStyle(
+                              color: colorScheme.onSurface.withOpacity(0.6),
+                            ),
+                          ),
+                          const SizedBox(width: 16),
+                          Text(
+                            '€${food['price']}/${food['unit'] ?? 'kg'}',
+                            style: TextStyle(
+                              fontWeight: FontWeight.w600,
+                              color: colorScheme.onSurface.withOpacity(0.7),
+                            ),
+                          ),
+                        ],
+                      ),
+                    );
+                  },
+                ),
+              ),
+              // Divider + Total
+              Padding(
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 20,
+                  vertical: 12,
+                ),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    const Text('Gesamtpreis:', style: TextStyle(fontSize: 18)),
+                    Text(
+                      'Gesamtpreis:',
+                      style: TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.bold,
+                        color: colorScheme.onSurface,
+                      ),
+                    ),
                     Text(
                       '€${totalPrice.toStringAsFixed(2)}',
-                      style: const TextStyle(
-                        fontSize: 24,
+                      style: TextStyle(
+                        fontSize: 20,
                         fontWeight: FontWeight.bold,
+                        color: colorScheme.primary,
                       ),
                     ),
                   ],
                 ),
               ),
+              // Checkout button
               Padding(
-                padding: const EdgeInsets.symmetric(
-                  horizontal: 20.0,
-                  vertical: 20.0,
-                ),
+                padding: const EdgeInsets.fromLTRB(20, 0, 20, 28),
                 child: SizedBox(
                   width: double.infinity,
                   child: ElevatedButton(
                     onPressed: () {
                       Navigator.pop(context);
-                      // Execute Checkout Logic here
+                      _checkout();
                     },
                     style: ElevatedButton.styleFrom(
-                      backgroundColor: Colors.black,
+                      backgroundColor: colorScheme.primary,
+                      foregroundColor: colorScheme.onPrimary,
                       padding: const EdgeInsets.symmetric(vertical: 16),
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(12),
                       ),
                     ),
                     child: const Text(
-                      'Zahlung bestätigen',
-                      style: TextStyle(color: Colors.white, fontSize: 18),
+                      'Checkout',
+                      style: TextStyle(
+                        fontSize: 17,
+                        fontWeight: FontWeight.bold,
+                      ),
                     ),
                   ),
                 ),
@@ -265,7 +371,8 @@ class _CartPageState extends State<CartPage> {
                                 padding: EdgeInsets.zero,
                                 style: IconButton.styleFrom(
                                   backgroundColor: colorScheme.primaryContainer,
-                                  foregroundColor: colorScheme.onPrimaryContainer,
+                                  foregroundColor:
+                                      colorScheme.onPrimaryContainer,
                                   shape: RoundedRectangleBorder(
                                     borderRadius: BorderRadius.circular(8),
                                   ),
@@ -292,7 +399,8 @@ class _CartPageState extends State<CartPage> {
                                 padding: EdgeInsets.zero,
                                 style: IconButton.styleFrom(
                                   backgroundColor: colorScheme.primaryContainer,
-                                  foregroundColor: colorScheme.onPrimaryContainer,
+                                  foregroundColor:
+                                      colorScheme.onPrimaryContainer,
                                   shape: RoundedRectangleBorder(
                                     borderRadius: BorderRadius.circular(8),
                                   ),
@@ -346,10 +454,12 @@ class _CartPageState extends State<CartPage> {
                 ],
               ),
               ElevatedButton(
-                onPressed: _showCheckoutPanel,
+                onPressed: cartItems.isEmpty ? null : _showCheckoutPanel,
                 style: ElevatedButton.styleFrom(
                   backgroundColor: colorScheme.primary,
                   foregroundColor: colorScheme.onPrimary,
+                  disabledBackgroundColor: colorScheme.onSurface.withOpacity(0.12),
+                  disabledForegroundColor: colorScheme.onSurface.withOpacity(0.38),
                   padding: const EdgeInsets.symmetric(
                     horizontal: 32,
                     vertical: 16,

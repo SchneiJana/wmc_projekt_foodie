@@ -199,8 +199,8 @@ class _DetailsPageState extends State<DetailsPage> {
                 bottom: 20,
                 top: 10,
               ),
-              child: Align(
-                alignment: Alignment.centerRight,
+              child: SizedBox(
+                width: double.infinity,
                 child: ElevatedButton.icon(
                   onPressed: _addToCart,
                   icon: const Icon(
