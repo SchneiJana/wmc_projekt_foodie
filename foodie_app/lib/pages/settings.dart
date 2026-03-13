@@ -17,7 +17,7 @@ class SettingsPage extends StatelessWidget {
           onPressed: () => context.pop(),
         ),
         title: const Text(
-          'Settings',
+          'Einstellungen',
           style: TextStyle(fontWeight: FontWeight.bold),
         ),
         centerTitle: true,
@@ -31,7 +31,7 @@ class SettingsPage extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             const Text(
-              'Themes',
+              'Designs',
               style: TextStyle(
                 fontSize: 16,
                 fontWeight: FontWeight.w600,
@@ -41,7 +41,7 @@ class SettingsPage extends StatelessWidget {
             const SizedBox(height: 15),
             _buildThemeOption(
               context,
-              title: 'Light Mode',
+              title: 'Hell',
               icon: Icons.light_mode_outlined,
               value: AppTheme.light,
               currentValue: themeService.currentTheme,
@@ -50,7 +50,7 @@ class SettingsPage extends StatelessWidget {
             const SizedBox(height: 10),
             _buildThemeOption(
               context,
-              title: 'Dark Mode',
+              title: 'Dunkel',
               icon: Icons.dark_mode_outlined,
               value: AppTheme.dark,
               currentValue: themeService.currentTheme,
@@ -59,7 +59,7 @@ class SettingsPage extends StatelessWidget {
             const SizedBox(height: 10),
             _buildThemeOption(
               context,
-              title: 'Pink Theme',
+              title: 'Pink',
               icon: Icons.palette_outlined,
               value: AppTheme.pink,
               currentValue: themeService.currentTheme,
@@ -68,7 +68,7 @@ class SettingsPage extends StatelessWidget {
             const SizedBox(height: 10),
             _buildThemeOption(
               context,
-              title: 'Green Theme',
+              title: 'Grün',
               icon: Icons.palette_outlined,
               value: AppTheme.green,
               currentValue: themeService.currentTheme,
@@ -77,7 +77,7 @@ class SettingsPage extends StatelessWidget {
             const SizedBox(height: 10),
             _buildThemeOption(
               context,
-              title: 'Blue Theme',
+              title: 'Blau',
               icon: Icons.palette_outlined,
               value: AppTheme.blue,
               currentValue: themeService.currentTheme,
@@ -90,7 +90,10 @@ class SettingsPage extends StatelessWidget {
               onTap: () => context.push('/cart'),
               borderRadius: BorderRadius.circular(15),
               child: Container(
-                padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 15),
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 20,
+                  vertical: 15,
+                ),
                 decoration: BoxDecoration(
                   color: Colors.grey.withOpacity(0.1),
                   borderRadius: BorderRadius.circular(15),
