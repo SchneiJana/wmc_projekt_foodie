@@ -172,6 +172,32 @@ class _CartPageState extends State<CartPage> {
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
+                          ClipRRect(
+                            borderRadius: BorderRadius.circular(6),
+                            child: SizedBox(
+                              width: 40,
+                              height: 40,
+                              child: food['imagePath'] != null
+                                  ? Image.asset(
+                                      (food['imagePath'] as String).trim(),
+                                      fit: BoxFit.cover,
+                                      errorBuilder:
+                                          (context, error, stackTrace) => Icon(
+                                        Icons.image_outlined,
+                                        size: 20,
+                                        color: colorScheme.onSurface
+                                            .withOpacity(0.3),
+                                      ),
+                                    )
+                                  : Icon(
+                                      Icons.image_outlined,
+                                      size: 20,
+                                      color: colorScheme.onSurface
+                                          .withOpacity(0.3),
+                                    ),
+                            ),
+                          ),
+                          const SizedBox(width: 12),
                           Expanded(
                             child: Text(
                               food['name'],
@@ -189,7 +215,7 @@ class _CartPageState extends State<CartPage> {
                           ),
                           const SizedBox(width: 16),
                           Text(
-                            '€${food['price']}/${food['unit'] ?? 'kg'}',
+                            '€${food['price'].toStringAsFixed(2)}/${food['unit'] ?? 'kg'}',
                             style: TextStyle(
                               fontWeight: FontWeight.w600,
                               color: colorScheme.onSurface.withOpacity(0.7),
@@ -303,21 +329,36 @@ class _CartPageState extends State<CartPage> {
                   ),
                   child: Row(
                     children: [
-                      // Image Placeholder
-                      Container(
-                        width: 80,
-                        height: 80,
-                        decoration: BoxDecoration(
-                          color: colorScheme.surface,
-                          borderRadius: BorderRadius.circular(12),
-                          border: Border.all(
-                            color: colorScheme.primary.withOpacity(0.2),
+                      // Image
+                      ClipRRect(
+                        borderRadius: BorderRadius.circular(12),
+                        child: Container(
+                          width: 80,
+                          height: 80,
+                          decoration: BoxDecoration(
+                            color: colorScheme.surface,
+                            border: Border.all(
+                              color: colorScheme.primary.withOpacity(0.2),
+                            ),
                           ),
-                        ),
-                        child: Icon(
-                          Icons.image_outlined,
-                          color: colorScheme.primary.withOpacity(0.5),
-                          size: 40,
+                          child: food['imagePath'] != null
+                              ? Image.asset(
+                                  (food['imagePath'] as String).trim(),
+                                  fit: BoxFit.cover,
+                                  errorBuilder: (context, error, stackTrace) {
+                                    return Icon(
+                                      Icons.image_outlined,
+                                      color:
+                                          colorScheme.primary.withOpacity(0.5),
+                                      size: 40,
+                                    );
+                                  },
+                                )
+                              : Icon(
+                                  Icons.image_outlined,
+                                  color: colorScheme.primary.withOpacity(0.5),
+                                  size: 40,
+                                ),
                         ),
                       ),
                       const SizedBox(width: 16),

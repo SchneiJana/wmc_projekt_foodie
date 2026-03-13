@@ -63,18 +63,41 @@ class _DetailsPageState extends State<DetailsPage> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      // Image Placeholder
-                      Container(
-                        height: 250,
-                        width: double.infinity,
-                        decoration: BoxDecoration(
-                          color: colorScheme.secondaryContainer.withOpacity(0.5),
-                          borderRadius: BorderRadius.circular(12),
-                        ),
-                        child: Icon(
-                          Icons.image_outlined,
-                          size: 100,
-                          color: colorScheme.primary.withOpacity(0.7),
+                      // Image
+                      ClipRRect(
+                        borderRadius: BorderRadius.circular(12),
+                        child: SizedBox(
+                          height: 250,
+                          width: double.infinity,
+                          child: widget.food.imagePath != null
+                              ? Image.asset(
+                                  widget.food.imagePath!.trim(),
+                                  fit: BoxFit.cover,
+                                  errorBuilder: (context, error, stackTrace) {
+                                    return Container(
+                                      height: 250,
+                                      color: colorScheme.secondaryContainer
+                                          .withOpacity(0.5),
+                                      child: Icon(
+                                        Icons.image_outlined,
+                                        size: 100,
+                                        color: colorScheme.primary.withOpacity(
+                                          0.7,
+                                        ),
+                                      ),
+                                    );
+                                  },
+                                )
+                              : Container(
+                                  height: 250,
+                                  color: colorScheme.secondaryContainer
+                                      .withOpacity(0.5),
+                                  child: Icon(
+                                    Icons.image_outlined,
+                                    size: 100,
+                                    color: colorScheme.primary.withOpacity(0.7),
+                                  ),
+                                ),
                         ),
                       ),
                       const SizedBox(height: 24),
@@ -135,7 +158,8 @@ class _DetailsPageState extends State<DetailsPage> {
                                 icon: const Icon(Icons.remove, size: 20),
                                 style: IconButton.styleFrom(
                                   backgroundColor: colorScheme.primaryContainer,
-                                  foregroundColor: colorScheme.onPrimaryContainer,
+                                  foregroundColor:
+                                      colorScheme.onPrimaryContainer,
                                   shape: RoundedRectangleBorder(
                                     borderRadius: BorderRadius.circular(8),
                                   ),
@@ -161,7 +185,8 @@ class _DetailsPageState extends State<DetailsPage> {
                                 icon: const Icon(Icons.add, size: 20),
                                 style: IconButton.styleFrom(
                                   backgroundColor: colorScheme.primaryContainer,
-                                  foregroundColor: colorScheme.onPrimaryContainer,
+                                  foregroundColor:
+                                      colorScheme.onPrimaryContainer,
                                   shape: RoundedRectangleBorder(
                                     borderRadius: BorderRadius.circular(8),
                                   ),
@@ -203,10 +228,7 @@ class _DetailsPageState extends State<DetailsPage> {
                 width: double.infinity,
                 child: ElevatedButton.icon(
                   onPressed: _addToCart,
-                  icon: const Icon(
-                    Icons.shopping_cart,
-                    size: 20,
-                  ),
+                  icon: const Icon(Icons.shopping_cart, size: 20),
                   label: const Text(
                     "Zum Warenkorb hinzufügen",
                     style: TextStyle(fontSize: 16),

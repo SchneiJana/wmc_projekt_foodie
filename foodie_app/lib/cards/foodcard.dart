@@ -4,6 +4,7 @@ class FoodCard extends StatelessWidget {
   final String name;
   final double price;
   final String unit;
+  final String? imagePath;
   final VoidCallback? onTap;
   final VoidCallback? onCartTap;
 
@@ -12,6 +13,7 @@ class FoodCard extends StatelessWidget {
     required this.name,
     required this.price,
     required this.unit,
+    this.imagePath,
     this.onTap,
     this.onCartTap,
   });
@@ -29,14 +31,32 @@ class FoodCard extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const Center(
-              child: Icon(
-                Icons.image_outlined,
-                size: 80,
-                color: Colors.black54,
+            Expanded(
+              child: Center(
+                child: imagePath != null
+                    ? ClipRRect(
+                        borderRadius: BorderRadius.circular(8),
+                        child: Image.asset(
+                          imagePath!.trim(),
+                          fit: BoxFit.cover,
+                          width: double.infinity,
+                          errorBuilder: (context, error, stackTrace) {
+                            return const Icon(
+                              Icons.image_outlined,
+                              size: 80,
+                              color: Colors.black54,
+                            );
+                          },
+                        ),
+                      )
+                    : const Icon(
+                        Icons.image_outlined,
+                        size: 80,
+                        color: Colors.black54,
+                      ),
               ),
             ),
-            const Spacer(),
+            const SizedBox(height: 8),
             Text(name, style: const TextStyle(fontSize: 14)),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,

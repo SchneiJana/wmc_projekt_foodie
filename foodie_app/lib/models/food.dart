@@ -5,6 +5,7 @@ class Food {
   final String shopname;
   final double price;
   final String unit;
+  final String? imagePath;
 
   Food({
     required this.id,
@@ -13,16 +14,19 @@ class Food {
     required this.shopname,
     required this.price,
     required this.unit,
+    this.imagePath,
   });
 
   factory Food.fromJson(Map<String, dynamic> json) {
+    final image = json['image'] as String?;
     return Food(
       id: json['id'] as int,
-      name: json['name'],
-      description: json['description'],
-      shopname: json['shopname'],
-      price: json['price'] as double,
-      unit: json['unit'],
+      name: json['name'] as String? ?? '',
+      description: json['description'] as String? ?? '',
+      shopname: json['shopname'] as String? ?? '',
+      price: (json['price'] as num).toDouble(),
+      unit: json['unit'] as String? ?? '',
+      imagePath: (image != null && image.isNotEmpty) ? 'assets/${image}' : null,
     );
   }
 
@@ -33,5 +37,6 @@ class Food {
     'shopname': shopname,
     'price': price,
     'unit': unit,
+    'imagePath': imagePath,
   };
 }

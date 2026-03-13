@@ -183,6 +183,7 @@ class _HomeState extends State<Home> {
                         name: foods[index].name,
                         price: foods[index].price,
                         unit: foods[index].unit,
+                        imagePath: foods[index].imagePath,
                       ),
                     );
                   },
@@ -202,8 +203,9 @@ class _HomeState extends State<Home> {
           backgroundColor: Colors.transparent,
           elevation: 0,
           selectedItemColor: Theme.of(context).colorScheme.primary,
-          unselectedItemColor:
-              Theme.of(context).colorScheme.onSecondaryContainer.withOpacity(0.5),
+          unselectedItemColor: Theme.of(
+            context,
+          ).colorScheme.onSecondaryContainer.withOpacity(0.5),
           currentIndex: 0, // Set to 0 because this is Home
           onTap: (index) {
             if (index == 1) {
